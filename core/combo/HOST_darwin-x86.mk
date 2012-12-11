@@ -48,8 +48,8 @@ endif # build_mac_version is 10.6
 HOST_GLOBAL_CFLAGS += -fPIC
 HOST_NO_UNDEFINED_LDFLAGS := -Wl,-undefined,error
 
-HOST_CC := $(CC)
-HOST_CXX := $(CXX)
+HOST_CC := gcc
+HOST_CXX := g++
 HOST_AR := $(AR)
 HOST_STRIP := $(STRIP)
 HOST_STRIP_COMMAND = $(HOST_STRIP) --strip-debug $< -o $@
@@ -71,7 +71,7 @@ HOST_CUSTOM_LD_COMMAND := true
 
 # Workaround for lack of "-Wl,--whole-archive" in MacOS's linker.
 define _darwin-extract-and-include-single-whole-static-lib
-@echo "preparing StaticLib: $(PRIVATE_MODULE) [including $(1)]"
+@echo -e ${CL_YLW}"preparing StaticLib:"${CL_RST}" $(PRIVATE_MODULE) [including $(1)]"
 $(hide) ldir=$(PRIVATE_INTERMEDIATES_DIR)/WHOLE/$(basename $(notdir $(1)))_objs;\
     mkdir -p $$ldir; \
     for f in `$(HOST_AR) t $(1)`; do \
@@ -126,5 +126,10 @@ endef
 
 # $(1): The file to check
 define get-file-size
-stat -f "%z" $(1)
+GSTAT=$(which gstat) ; \
+if [ ! -z "$GSTAT" ]; then \
+gstat -c "%s" $(1) ; \
+else \
+stat -f "%z" $(1) ; \
+fi
 endef
