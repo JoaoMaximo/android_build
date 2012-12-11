@@ -499,7 +499,7 @@ function breakfast()
     JELLAXY_DEVICES_ONLY="true"
     unset LUNCH_MENU_CHOICES
     add_lunch_combo full-eng
-    for f in `/bin/ls vendor/cm/vendorsetup.sh 2> /dev/null`
+    for f in `/bin/ls device/samung/msm7x27-common/vendorsetup.sh 2> /dev/null`
         do
             echo "including $f"
             . $f
@@ -651,8 +651,8 @@ function tapas()
 function eat()
 {
     if [ "$OUT" ] ; then
-        MODVERSION=`sed -n -e'/ro\.cm\.version/s/.*=//p' $OUT/system/build.prop`
-        ZIPFILE=cm-$MODVERSION.zip
+        MODVERSION=`sed -n -e'/ro\.jellaxy\.version/s/.*=//p' $OUT/system/build.prop`
+        ZIPFILE=jellaxy-$MODVERSION.zip
         ZIPPATH=$OUT/$ZIPFILE
         MD5SUMFILE=$ZIPPATH.md5sum
         if [ ! -f $ZIPPATH ] ; then
@@ -1305,7 +1305,7 @@ function installboot()
     adb wait-for-device
     adb remount
     adb wait-for-device
-    if (adb shell cat /system/build.prop | grep -q "ro.cm.device=$JELLAXY_BUILD");
+    if (adb shell cat /system/build.prop | grep -q "ro.jellaxy.device=$JELLAXY_BUILD");
     then
         adb push $OUT/boot.img /cache/
         for i in $OUT/system/lib/modules/*;
@@ -1344,7 +1344,7 @@ function installrecovery()
     adb wait-for-device
     adb remount
     adb wait-for-device
-    if (adb shell cat /system/build.prop | grep -q "ro.cm.device=$JELLAXY_BUILD");
+    if (adb shell cat /system/build.prop | grep -q "ro.jellaxy.device=$JELLAXY_BUILD");
     then
         adb push $OUT/recovery.img /cache/
         adb shell dd if=/cache/recovery.img of=$PARTITION
