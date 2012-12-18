@@ -30,7 +30,7 @@ GRANDFATHERED_ALL_PREBUILT := \
 	bitmap_size.txt \
 	bmgr \
 	bp.img \
-	brcm_guci_drv \
+	brjellaxy_guci_drv \
 	bypassfactory \
 	cdt.bin \
 	chat-ril \
@@ -62,8 +62,8 @@ GRANDFATHERED_ALL_PREBUILT := \
 	lbl \
 	libEGL_POWERVR_SGX530_121.so \
 	libEGL_tegra.so \
-	libGLESv1_CM_POWERVR_SGX530_121.so \
-	libGLESv1_CM_tegra.so \
+	libGLESv1_JELLAXY_POWERVR_SGX530_121.so \
+	libGLESv1_JELLAXY_tegra.so \
 	libGLESv2_POWERVR_SGX530_121.so \
 	libGLESv2_tegra.so \
 	libmoto_ril.so \
